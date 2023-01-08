@@ -16,17 +16,23 @@ Once you've done that, you can install and configure this package by following t
 **Configure your Directus/MySQL setup:**
 
 1. Within the directus-mysql-template directory, run `npm install`
-2. Lastly, run `npm start`. The wizard will walk you through the config.
+2. Lastly, run `npm start`. The wizard will walk you through the config, and automatically launch all services for you.
 
 *Note that you'll only have to do these two steps the first time you run this.*
 
-### Running Docker Compose
+### Starting/stopping with Docker Compose
 
-Now that you've configured your install, you can run the following commands from within the same directory:
+To **stop** your running services, simply run `docker compose down` in your terminal from within the project directory. All services will be stopped.
+
+To **restart** your stopped services, you can let the helper app do it for you:
+
+`npm start`
+
+Or you can follow this sequence:
 
 `docker compose up mysql -d`
 
-Wait 20-30 seconds (for MySQL to boot), then type:
+Then wait 10-20 seconds (for MySQL to boot), then type:
 
 `docker compose up -d`
 

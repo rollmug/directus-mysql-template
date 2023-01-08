@@ -2,16 +2,79 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import generator from 'generate-password';
 import * as fs from 'fs';
+import * as dotenv from 'dotenv';
+dotenv.config();
+import waitOn from 'wait-on';
+import { spawn } from 'node:child_process'
 
 var envPath = './.env';
+
+var opts = {
+    resources: [
+        'tcp:127.0.0.1:3306'
+    ],
+    delay: 1000,
+    interval: 100,
+    timeout: 30000,
+    tcpTimeout: 30000
+}
+
+function loadingAnimation(
+    text = "",
+    chars = ["⠙", "⠘", "⠰", "⠴", "⠤", "⠦", "⠆", "⠃", "⠋", "⠉"],
+    delay = 100
+) {
+    let x = 0;
+
+    return setInterval(function () {
+        process.stdout.write("\r" + chars[x++] + " " + text);
+        x = x % chars.length;
+    }, delay);
+}
+
+function launchServices() {
+    const launch = spawn('docker', ['compose', 'up', 'mysql', '-d']);
+
+    launch.on('close', code => {
+        console.log(`Docker has launched MySQL service (status = ${code}).`);
+
+        let loader = loadingAnimation("Waiting for MySQL to be ready...");
+
+        waitOn(opts, (err) => {
+            if (err) console.log(err);
+            // once here, all resources are available
+
+            const sleeper = spawn('sleep', [5]);
+            sleeper.on('close', code => {
+                setTimeout(() => clearInterval(loader), 0);
+                console.log('MySQL ready.');
+
+                const launch = spawn('docker', ['compose', 'up', '-d']);
+                launch.on('close', code => {
+                    console.log(chalk.green("\nAll services should be ready. You can access them at the following URLs:\n"));
+
+                    console.log(`Directus CMS: ${chalk.cyan("http://localhost:8055")}`);
+                    console.log(`Adminer: ${chalk.cyan("http://localhost:8080")}`);
+                    console.log(`GraphiQL Playground: ${chalk.cyan("http://localhost:4000/graphql")}`);
+
+                    console.log(`\n${chalk.redBright("Note: learn how to avoid CORS errors in the GraphiQL Playground when running on localhost:")}`);
+                    console.log(`https://github.com/rollmug/directus-mysql-template#cors-problems-on-localhost`)
+
+                    console.log(`\n${chalk.green("Done!")}\n`);
+                });
+            });
+
+        });
+    });
+}
 
 try {
     console.log(chalk.magentaBright("Configure Directus with MySQL, Adminer, and a GraphQL playground"));
     console.log(chalk.dim("---------------------------------------------\n"));
     if (fs.existsSync(envPath)) {
-        
         console.log(chalk.green("All set! Looks like we're already configured."));
-        console.log("You can always edit the variables that we've just set in the .env file manually. You can now proceed with running docker compose.\n\n");
+        console.log("You can always edit the variables that we've just set in the .env file manually. Automatically running docker compose:\n\n");
+        launchServices();
     } else {
         //let's do the configuring!
         console.log("Follow the prompts to configure Directus and MySQL.\n");
@@ -34,9 +97,9 @@ try {
             {
                 name: 'ADMIN_PASSWORD',
                 message: 'Type a password to login with, or hit return to use suggested:',
-                default: generator.generate({length: 14, numbers: true, symbols:false}),
+                default: generator.generate({ length: 14, numbers: true, symbols: false }),
                 validate: (password) => {
-                    if(password === null || password === false || password == '' || password.length < 8) {
+                    if (password === null || password === false || password == '' || password.length < 8) {
                         console.log(chalk.red("\nPassword cannot be empty, and must have at least 8 characters."))
                     } else {
                         //console.log("\nNext, we need to set up the MySQL credentials.");
@@ -56,7 +119,7 @@ try {
             {
                 name: 'MYSQL_PASS',
                 message: "MySQL Password:",
-                default: generator.generate({length: 14, numbers: true, symbols:false}),
+                default: generator.generate({ length: 14, numbers: true, symbols: false }),
             },
             {
                 name: 'MYSQL_DB',
@@ -66,7 +129,7 @@ try {
             {
                 name: 'MYSQL_ROOT_PASS',
                 message: "Root password:",
-                default: generator.generate({length: 14, numbers: true, symbols:false})
+                default: generator.generate({ length: 14, numbers: true, symbols: false })
             }
         ]).then(answers => {
             console.log(chalk.magentaBright("\nWriting to environment file. Be sure to take note of your credentials below, you'll need them shortly!\n"));
@@ -106,7 +169,9 @@ try {
             writeStream.end();
 
             console.log(chalk.greenBright("\nAll set!"));
-            console.log("You can always edit the variables that we've just set in the .env file manually. You can now proceed with running docker compose.\n\n");
+            console.log("You can always edit the variables that we've just set in the .env file manually. Automatically running docker compose:\n\n");
+
+            launchServices();
         })
     }
 } catch (err) {
