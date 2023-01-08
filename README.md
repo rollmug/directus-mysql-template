@@ -13,7 +13,7 @@ Once you've done that, you can install and configure this package by following t
 2. From there, run `git clone https://github.com/rollmug/directus-mysql-template.git`, OR, if you don't have git installed, [manually download it here](https://github.com/rollmug/directus-mysql-template/archive/refs/heads/main.zip) and unzip it.
 3. Navigate into the folder you just downloaded: `cd directus-mysql-template`
 
-### To configure your Directus/MySQL setup:
+**Configure your Directus/MySQL setup:**
 
 1. Within the directus-mysql-template directory, run `npm install`
 2. Lastly, run `npm start`. The wizard will walk you through the config.
