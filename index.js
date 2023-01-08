@@ -35,6 +35,10 @@ function loadingAnimation(
 function launchServices() {
     const launch = spawn('docker', ['compose', 'up', 'mysql', '-d']);
 
+    launch.stderr.on('data', (data) => {
+        console.error(`${data}`);
+    });
+
     launch.on('close', code => {
         console.log(`Docker has launched MySQL service (status = ${code}).`);
 
@@ -49,8 +53,18 @@ function launchServices() {
                 setTimeout(() => clearInterval(loader), 0);
                 console.log('MySQL ready.');
 
-                const launch = spawn('docker', ['compose', 'up', '-d']);
-                launch.on('close', code => {
+                let loader2 = loadingAnimation("Building and launching containers...");
+
+                const launch2 = spawn('docker', ['compose', 'up', '-d']);
+
+                launch2.stderr.on('data', (data) => {
+                    console.error(`${data}`);
+                });
+
+                launch2.on('close', code => {
+                    setTimeout(() => clearInterval(loader2), 0);
+                    console.log('done.');
+
                     console.log(chalk.green("\nAll services should be ready. You can access them at the following URLs:\n"));
 
                     console.log(`Directus CMS: ${chalk.cyan("http://localhost:8055")}`);
@@ -73,7 +87,7 @@ try {
     console.log(chalk.dim("---------------------------------------------\n"));
     if (fs.existsSync(envPath)) {
         console.log(chalk.green("All set! Looks like we're already configured."));
-        console.log("You can always edit the variables that we've just set in the .env file manually. Automatically running docker compose:\n\n");
+        console.log("You can always edit the variables that we've just set in the .env file manually. Automatically running docker compose:\n");
         launchServices();
     } else {
         //let's do the configuring!
@@ -169,7 +183,9 @@ try {
             writeStream.end();
 
             console.log(chalk.greenBright("\nAll set!"));
-            console.log("You can always edit the variables that we've just set in the .env file manually. Automatically running docker compose:\n\n");
+            console.log("You can always edit the variables that we've just set in the .env file manually.\n");
+
+            console.log(`${chalk.redBright("Automatically running docker compose. BE PATIENT the first time you do this. Susequent runs will be fast.")}\n`);
 
             launchServices();
         })
