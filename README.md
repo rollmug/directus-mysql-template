@@ -11,7 +11,7 @@ Once you've installed Node and Docker, and have Docker Desktop running on your m
 
 1. Open a terminal session:  
     **Mac:** Go to /Applications/Utilities then double-click Terminal.  
-    **Windows:** Click 'Start' taskbar button, Select 'All apps', scroll down and select 'Windows Terminal'
+    **Windows:** Click 'Start' taskbar button, Select 'All apps', scroll down and select 'Terminal'
 2. CD into the parent directory where you'd like to install this, ie `cd ~/Documents/My-Folder`.
 3. From there, run `git clone https://github.com/rollmug/directus-mysql-template.git`, OR, if you don't have git installed, [manually download it here](https://github.com/rollmug/directus-mysql-template/archive/refs/heads/main.zip) and unzip it.
 4. Navigate into the folder you just downloaded: `cd directus-mysql-template`

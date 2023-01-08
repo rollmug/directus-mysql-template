@@ -1,6 +1,6 @@
 mysql/*
 directus/uploads/*
-
+.DS_Store
 *.DS_STORE
 config.sh
 
