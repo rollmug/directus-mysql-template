@@ -1,5 +1,23 @@
 ### Docker with Directus / MySQL / Adminer / GraphQL
 
+This package contains everything you need to get up and running with Directus CMS, with a MySQL backend, plus an interactive GraphQL playground to help you develop your API queries.
+
+Before you do anything else, you need [Docker](https://www.docker.com) and [Node](https://nodejs.org) installed on your machine:
+
+[Install Docker Desktop](https://www.docker.com/products/docker-desktop/)  
+[Install Node](https://nodejs.org/en/download/)
+
+Once you've done that, you can install this package on your machine by either:
+
+1. Run `npm install dkobrenski/directus-mysql-template`
+2. Or, run `git clone https://github.com/rollmug/directus-mysql-template.git` and then cd into it, and run `npm install`
+
+From there, you can configure your app like this:
+
+1. CD into the package directory, and run `npm start`. The wizard will walk you through the config.
+
+### Running Docker Compose
+
 In the directory with the docker-compose.yml file, open terminal and type:
 
 `docker compose up mysql -d`
