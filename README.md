@@ -9,10 +9,11 @@ Before you do anything else, you need [Docker](https://www.docker.com) and [Node
 
 Once you've done that, you can install this package on your machine by:
 
-1. CD into your parent directory where you'd like to install this.
+1. CD into your parent directory where you'd like to install this, ie `cd ~/Documents/My-Folder`.
 2. From there, run `git clone https://github.com/rollmug/directus-mysql-template.git`
-3. Run `cd directus-mysql-template` and then `npm install`
-4. Lastly, run `npm start`. The wizard will walk you through the config.
+3. Navigate into the folder you just downloaded: `cd directus-mysql-template`
+4. Run `npm install`
+5. Lastly, run `npm start`. The wizard will walk you through the config.
 
 ### Running Docker Compose
 
@@ -20,11 +21,11 @@ Now that you've configured your install, you can run the following commands from
 
 `docker compose up mysql -d`
 
-Wait 20-30 seconds, then type:
+Wait 20-30 seconds (for MySQL to boot), then type:
 
 `docker compose up -d`
 
-You can access URLS from here:
+You can access the URLS from here:
 
 Directus CMS: http://localhost:8055  
 GraphQL Playground: http://localhost:4000/graphql  
