@@ -16,15 +16,15 @@ Once you've done that, you can install and configure this package by following t
 **Configure your Directus/MySQL setup:**
 
 1. Within the directus-mysql-template directory, run `npm install`
-2. Lastly, run `npm start`. The wizard will walk you through the config, and automatically launch all services for you.
+2. Lastly, run `npm start`. The wizard will walk you through the config, and automatically launch all containers for you.
 
 *Note that you'll only have to do these two steps the first time you run this.*
 
 ### Starting/stopping with Docker Compose
 
-To **stop** your running services, simply run `docker compose down` in your terminal from within the project directory. All services will be stopped.
+To **stop** your running containers, simply run `docker compose down` in your terminal from within the project directory. All containers will be stopped.
 
-To **restart** your stopped services, you can let the helper app do it for you:
+To **restart** your stopped containers, you can let the helper app do it for you:
 
 `npm start`
 
@@ -42,7 +42,11 @@ Directus CMS: http://localhost:8055
 GraphQL Playground: http://localhost:4000/graphql  
 Adminer (for MySQL): http://localhost:8080
 
-### CORS problems on localhost
+**Check on running containers:**
+
+Simply run `docker compose ps` to see the status of running containers. Or, run `docker compose ps -a` to see all containers, running or not.
+
+## CORS problems on localhost
 
 When using the GraphiQL playground on localhost, you'll run into some browser problems related to CORS. Here's how to get around it:
 
