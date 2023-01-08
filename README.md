@@ -7,9 +7,9 @@ Before you do anything else, you need [Docker](https://www.docker.com) and [Node
 - [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)  
 - [Install Node](https://nodejs.org/en/download/)
 
-Once you've done that, you can install this package on your machine by:
+Once you've done that, you can install this package by following these steps:
 
-1. CD into your parent directory where you'd like to install this, ie `cd ~/Documents/My-Folder`.
+1. CD into the parent directory where you'd like to install this, ie `cd ~/Documents/My-Folder`.
 2. From there, run `git clone https://github.com/rollmug/directus-mysql-template.git`
 3. Navigate into the folder you just downloaded: `cd directus-mysql-template`
 4. Run `npm install`
@@ -37,7 +37,7 @@ When using the GraphiQL playground on localhost, you'll run into some browser pr
 
 **Safari:**
 
-1. Enable the developer menu by opening up Settings, Advanced, check "Show Develop bar in menu"
+1. Enable the developer menu by opening up Settings > Advanced, then check "Show Develop bar in menu"
 2. Click the Develop menu and check "Disable Cross-Origin Restrictions"
 
 **Chrome**
@@ -45,7 +45,7 @@ When using the GraphiQL playground on localhost, you'll run into some browser pr
 Temporarily Disable CORS in Chrome (MacOS):
 
 1. Quit Chrome
-2. Open terminal session and run:
+2. Open terminal and run:
 
 `open -n -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security`
 
