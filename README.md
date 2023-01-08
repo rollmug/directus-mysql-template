@@ -30,7 +30,7 @@ Wait 20-30 seconds (for MySQL to boot), then type:
 
 `docker compose up -d`
 
-You can access the URLS from here:
+**Boom!** You're done. Now you can access the URLS from here:
 
 Directus CMS: http://localhost:8055  
 GraphQL Playground: http://localhost:4000/graphql  
