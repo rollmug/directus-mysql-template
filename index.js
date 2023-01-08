@@ -69,7 +69,7 @@ try {
                 default: generator.generate({length: 14, numbers: true, symbols:false})
             }
         ]).then(answers => {
-            console.log(chalk.magentaBright("\nWriting to environment file:\n"));
+            console.log(chalk.magentaBright("\nWriting to environment file. Be sure to take note of your credentials below, you'll need them shortly!\n"));
             console.log(answers);
 
             var writeStream = fs.createWriteStream(envPath);
