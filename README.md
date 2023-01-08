@@ -2,16 +2,17 @@
 
 This package contains everything you need to get up and running with Directus CMS with a MySQL backend, plus an interactive GraphQL playground to help you develop your API queries.
 
-Before you do anything else, you need [Docker](https://www.docker.com) and [Node](https://nodejs.org) installed on your machine:
+**Before you do anything else**, you need [Docker](https://www.docker.com) and [Node](https://nodejs.org) installed on your machine:
 
 - [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)  
 - [Install Node](https://nodejs.org/en/download/)
 
-Once you've done that, you can install and configure this package by following these steps:
+Once you've installed Node and Docker, and have Docker Desktop running on your machine, you can install and configure this package by following these steps:
 
-1. CD into the parent directory where you'd like to install this, ie `cd ~/Documents/My-Folder`.
-2. From there, run `git clone https://github.com/rollmug/directus-mysql-template.git`, OR, if you don't have git installed, [manually download it here](https://github.com/rollmug/directus-mysql-template/archive/refs/heads/main.zip) and unzip it.
-3. Navigate into the folder you just downloaded: `cd directus-mysql-template`
+1. Open a terminal session (**Mac:** Go to '/Applications/Utilities' then double-click Terminal. **Windows:** Click 'Start' taskbar button, Select 'All apps', scroll down and select 'Windows Terminal')
+2. CD into the parent directory where you'd like to install this, ie `cd ~/Documents/My-Folder`.
+3. From there, run `git clone https://github.com/rollmug/directus-mysql-template.git`, OR, if you don't have git installed, [manually download it here](https://github.com/rollmug/directus-mysql-template/archive/refs/heads/main.zip) and unzip it.
+4. Navigate into the folder you just downloaded: `cd directus-mysql-template`
 
 **Configure your Directus/MySQL setup:**
 
