@@ -184,10 +184,9 @@ try {
 
             console.log(chalk.greenBright("\nAll set!"));
             console.log("You can always edit the variables that we've just set in the .env file manually.\n");
-
-            console.log(`${chalk.redBright("Automatically running docker compose. BE PATIENT the first time you do this. Susequent runs will be fast.")}\n`);
-
-            launchServices();
+            console.log(`${chalk.greenBright("To launch all services, just run 'npm start' again.")}`);
+            //console.log(`${chalk.redBright("Automatically running docker compose. BE PATIENT the first time you do this. Susequent runs will be fast.")}\n`);
+            //launchServices();
         })
     }
 } catch (err) {

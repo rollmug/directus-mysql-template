@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
+    "launch": "node index.js",
     "test": "echo \"No test specified\""
   },
   "repository": {
