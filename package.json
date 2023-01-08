@@ -1,6 +1,6 @@
 {
   "name": "directus-mysql-template",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
   "main": "index.js",
   "type": "module",
