@@ -92,8 +92,8 @@ try {
     console.log(chalk.magentaBright("Configure Directus with MySQL, Adminer, and a GraphQL playground"));
     console.log(chalk.dim("---------------------------------------------\n"));
     if (fs.existsSync(envPath)) {
-        console.log(chalk.green("All set! Looks like we're already configured."));
-        console.log("You can always edit the variables that we've just set in the .env file manually. Automatically running docker compose:\n");
+        console.log(chalk.green("Looks like we're already configured, so let's get things up and running."));
+        console.log("ps - you can always edit the variables that we've just set in the .env file manually.\nAutomatically running docker compose:\n");
         launchServices();
     } else {
         //let's do the configuring!
