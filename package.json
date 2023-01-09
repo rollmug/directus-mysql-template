@@ -1,20 +1,30 @@
 {
-  "name": "directus-mysql-template",
+  "name": "directus-mysql-docker",
   "version": "1.0.5",
   "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "launch": "node index.js",
+    "start": "node ./lib/index.js",
+    "launch": "node ./lib/index.js",
     "test": "echo \"No test specified\""
+  },
+  "bin": {
+    "directus-mysql-docker": "./lib/index.js"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rollmug/directus-mysql-template.git"
   },
-  "author": "Dave Kobrenski",
-  "license": "ISC",
+  "author": {
+    "name": "Dave Kobrenski",
+    "email": "dave@rlmg.com"
+  },
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/rollmug/directus-mysql-template/issues"
   },
@@ -25,6 +35,7 @@
     "generate-password": "^1.7.0",
     "inquirer": "^9.1.4",
     "log-update": "^5.0.1",
+    "ora": "^6.1.2",
     "wait-on": "^7.0.1"
   }
 }
