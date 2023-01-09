@@ -1,5 +1,5 @@
 {
-  "name": "directus-mysql-docker",
+  "name": "create-directus-docker",
   "version": "1.0.6",
   "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
   "main": "./lib/index.js",
