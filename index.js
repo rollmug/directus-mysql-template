@@ -36,7 +36,7 @@ function launchServices() {
     const launch = spawn('docker', ['compose', 'up', 'mysql', '-d']);
 
     launch.stderr.on('data', (data) => {
-        console.error(`${data}`);
+        console.log(`${data}`);
     });
 
     launch.on('close', code => {
@@ -58,7 +58,7 @@ function launchServices() {
                 const launch2 = spawn('docker', ['compose', 'up', '-d']);
 
                 launch2.stderr.on('data', (data) => {
-                    console.error(`${data}`);
+                    console.log(`${data}`);
                 });
 
                 launch2.on('close', code => {
