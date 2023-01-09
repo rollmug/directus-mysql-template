@@ -10,8 +10,15 @@
     "test": "echo \"No test specified\""
   },
   "bin": {
-    "directus-mysql-docker": "./lib/index.js"
+    "create-directus-docker": "./lib/index.js",
+    "cdd": "./lib/index.js"
   },
+  "keywords": [
+    "directus",
+    "docker",
+    "mysql",
+    "installer"
+  ],
   "exports": {
     ".": "./lib/index.js",
     "./package.json": "./package.json"
