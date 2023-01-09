@@ -6,6 +6,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import waitOn from 'wait-on';
 import { spawn } from 'node:child_process'
+import logUpdate from 'log-update';
+//var log = require('single-line-log').stdout;
 
 var envPath = './.env';
 
@@ -36,10 +38,12 @@ function launchServices() {
     const launch = spawn('docker', ['compose', 'up', 'mysql', '-d']);
 
     launch.stderr.on('data', (data) => {
-        console.log(`${data}`);
+        //console.log(`${data}`);
+        logUpdate(`${data}`);
     });
 
     launch.on('close', code => {
+        logUpdate.done();
         console.log(`Docker has launched MySQL service (status = ${code}).`);
 
         let loader = loadingAnimation("Waiting for MySQL to be ready...");
@@ -58,10 +62,12 @@ function launchServices() {
                 const launch2 = spawn('docker', ['compose', 'up', '-d']);
 
                 launch2.stderr.on('data', (data) => {
-                    console.log(`${data}`);
+                    //console.log(`${data}`);
+                    logUpdate(`${data}`);
                 });
 
                 launch2.on('close', code => {
+                    logUpdate.done();
                     setTimeout(() => clearInterval(loader2), 0);
                     console.log('done.');
 
