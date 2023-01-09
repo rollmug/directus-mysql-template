@@ -116,7 +116,6 @@ try {
                     if (password === null || password === false || password == '' || password.length < 8) {
                         console.log(chalk.red("\nPassword cannot be empty, and must have at least 8 characters."))
                     } else {
-                        //console.log("\nNext, we need to set up the MySQL credentials.");
                         return true;
                     }
                 }
@@ -124,11 +123,7 @@ try {
             {
                 name: 'MYSQL_USER',
                 message: "Specify a user name for your MySQL database:",
-                default: 'admin',
-                validate: () => {
-                    //console.log("\nGreat. Now, set a password for the database.");
-                    return true;
-                }
+                default: 'admin'
             },
             {
                 name: 'MYSQL_PASS',
@@ -185,8 +180,6 @@ try {
             console.log(chalk.greenBright("\nAll set!"));
             console.log("You can always edit the variables that we've just set in the .env file manually.\n");
             console.log(`${chalk.greenBright("To launch all services, just run 'npm start' again.")}\n`);
-            //console.log(`${chalk.redBright("Automatically running docker compose. BE PATIENT the first time you do this. Susequent runs will be fast.")}\n`);
-            //launchServices();
         })
     }
 } catch (err) {
