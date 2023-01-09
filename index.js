@@ -57,18 +57,18 @@ function launchServices() {
                 setTimeout(() => clearInterval(loader), 0);
                 console.log('MySQL ready.');
 
-                let loader2 = loadingAnimation("Building and launching containers...");
+                //let loader2 = loadingAnimation("Building and launching containers...");
+                logUpdate("Building and launching containers...");
 
                 const launch2 = spawn('docker', ['compose', 'up', '-d']);
 
                 launch2.stderr.on('data', (data) => {
-                    //console.log(`${data}`);
                     logUpdate(`${data}`);
                 });
 
                 launch2.on('close', code => {
                     logUpdate.done();
-                    setTimeout(() => clearInterval(loader2), 0);
+                    //setTimeout(() => clearInterval(loader2), 0);
                     console.log('done.');
 
                     console.log(chalk.green("\nAll services should be ready. You can access them at the following URLs:\n"));
