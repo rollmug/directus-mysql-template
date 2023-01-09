@@ -1,6 +1,6 @@
 {
   "name": "create-directus-docker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
   "main": "./lib/index.js",
   "type": "module",
@@ -13,6 +13,12 @@
     "create-directus-docker": "./lib/index.js",
     "cdd": "./lib/index.js"
   },
+  "files": [
+    "docker-compose.yml",
+    "./lib/index.js",
+    "./lib/check-requirements.js",
+    "./lib/launch-services.js"
+  ],
   "keywords": [
     "directus",
     "docker",
