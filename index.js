@@ -82,6 +82,8 @@ function launchServices() {
 
                     console.log(`\n${chalk.green("Done! When you're finished, you can stop all running containers with:")}\n`);
                     console.log(`docker compose down\n`);
+                    console.log(`${chalk.green("You can start them all back up again with:")}`);
+                    console.log(`npm start\n`);
                 });
             });
 
