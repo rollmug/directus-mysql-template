@@ -1,12 +1,13 @@
 {
   "name": "create-directus-docker",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
   "main": "./lib/index.js",
   "type": "module",
   "scripts": {
     "start": "node ./lib/index.js",
     "launch": "node ./lib/index.js",
+    "stop": "docker-compose down",
     "test": "echo \"No test specified\""
   },
   "bin": {
@@ -48,6 +49,8 @@
     "generate-password": "^1.7.0",
     "inquirer": "^9.1.4",
     "log-update": "^5.0.1",
+    "lookpath": "^1.2.2",
+    "open": "^8.4.0",
     "ora": "^6.1.2",
     "wait-on": "^7.0.1"
   }
