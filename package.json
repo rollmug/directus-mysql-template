@@ -1,5 +1,5 @@
 {
-  "name": "create-directus-docker",
+  "name": "directus-mysql-template",
   "version": "1.0.8",
   "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
   "main": "./lib/index.js",
@@ -16,6 +16,7 @@
   },
   "files": [
     "docker-compose.yml",
+    "lib/**/*",
     "./lib/index.js",
     "./lib/check-requirements.js",
     "./lib/launch-services.js"
