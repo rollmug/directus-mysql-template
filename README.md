@@ -2,12 +2,24 @@
 
 This package contains everything you need to get up and running with Directus CMS with a MySQL backend, plus an interactive GraphQL playground to help you develop your API queries.
 
-**Before you do anything else**, you need [Docker](https://www.docker.com) and [Node](https://nodejs.org) installed on your machine:
+**Requirements:** you need [Docker](https://www.docker.com) and [Node](https://nodejs.org) installed on your machine:
 
 - [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)  
 - [Install Node](https://nodejs.org/en/download/)
 
-Once you've installed Node and Docker, and have Docker Desktop running on your machine, you can install and configure this package by following these steps:
+### Quick Install:
+
+**The easiest way to get up and running is to open a terminal session and run:**
+
+```bash
+npx create-directus-docker@latest <my-project>
+```
+
+Then, just follow the on-screen prompts.
+
+### Manual Install
+
+As an alternative, you can install this package by following these steps. Once you've installed Node and Docker, and have Docker Desktop running on your machine:
 
 1. Open a terminal session:  
     **Mac:** Go to /Applications/Utilities then double-click Terminal.  
