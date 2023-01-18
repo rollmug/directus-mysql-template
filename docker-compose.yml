@@ -72,7 +72,7 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       CORS_ENABLED: 'true'
-      CORS_ORIGIN: '*'
+      CORS_ORIGIN: 'true'
 
       PUBLIC_URL: ${PUBLIC_URL}
 
