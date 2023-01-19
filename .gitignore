@@ -1,4 +1,5 @@
 mysql/*
+init/*
 directus/uploads/*
 .DS_Store
 *.DS_STORE

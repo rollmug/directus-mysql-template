@@ -37,6 +37,10 @@ As an alternative, you can install this package by following these steps. Once y
 
 *Note that you'll only have to do these two steps the first time you run this.*
 
+### Seeding MySQL data
+
+If you want to seed your database with data on first launch, place your .sql file(s) in the "init" directory at the root of this package. MySQL will run any files in this directory the first time it launches.
+
 ### Starting/stopping with Docker Compose
 
 To **stop** your running containers, simply run `docker compose down` in your terminal from within the project directory. All containers will be stopped.
