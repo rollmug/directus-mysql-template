@@ -1,6 +1,6 @@
 {
   "name": "directus-mysql-docker",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
   "main": "./lib/index.js",
   "type": "module",
@@ -52,6 +52,7 @@
     "inquirer": "^9.1.4",
     "log-update": "^5.0.1",
     "lookpath": "^1.2.2",
+    "node-jq": "^2.3.5",
     "open": "^8.4.0",
     "ora": "^6.1.2",
     "wait-on": "^7.0.1"
