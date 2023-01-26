@@ -53,6 +53,7 @@ services:
       - ${DIRECTUS_PORT}:8055
     volumes:
       - ./directus/uploads:/directus/uploads
+      - ./snapshots:/directus/snapshots
     networks:
       - directus
     depends_on:
