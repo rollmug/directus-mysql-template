@@ -72,6 +72,9 @@ services:
       CACHE_ENABLED: 'true'
       CACHE_STORE: 'redis'
       CACHE_REDIS: 'redis://cache:6379'
+      CACHE_AUTO_PURGE: 'true'
+      CACHE_SYSTEM_TTL: '2m'
+      CACHE_SCHEMA: 'false'
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       CORS_ENABLED: 'true'
