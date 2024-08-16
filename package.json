@@ -1,16 +1,16 @@
 {
   "name": "directus-mysql-docker",
-  "version": "1.2.6",
-  "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and GraphQL",
+  "version": "1.2.7",
+  "description": "A helper app to configure Directus on Docker with MySQL, Adminer, and Apollo GraphQL Sandbox",
   "main": "./lib/index.js",
   "type": "module",
   "scripts": {
     "start": "node ./lib/index.js",
     "launch": "node ./lib/index.js",
-    "stop": "docker-compose down",
-    "snapshot": "docker-compose exec directus npx directus schema snapshot /directus/snapshots/\"$(date \"+%F\")\"-snapshot-\"$(date \"+%s\")\".yaml",
-    "snapshot-apply": "docker-compose exec directus npx directus schema apply /directus/snapshots/$npm_config_snapshot",
-    "snapshot-test": "docker-compose exec directus npx directus schema apply --dry-run /directus/snapshots/$npm_config_snapshot"
+    "stop": "docker compose down",
+    "snapshot": "docker compose exec directus npx directus schema snapshot /directus/snapshots/\"$(date \"+%F\")\"-snapshot-\"$(date \"+%s\")\".yaml",
+    "snapshot-apply": "docker compose exec directus npx directus schema apply /directus/snapshots/$npm_config_snapshot",
+    "snapshot-test": "docker compose exec directus npx directus schema apply --dry-run /directus/snapshots/$npm_config_snapshot"
   },
   "bin": {
     "create-directus-docker": "./lib/index.js",
