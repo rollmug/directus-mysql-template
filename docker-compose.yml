@@ -2,7 +2,7 @@ services:
 
   mysql:
     container_name: mysql
-    image: mysql:8.4.2
+    image: mysql:9.0.1
     restart: always
     healthcheck: 
       test: ['CMD', 'mysqladmin', 'ping', '--silent']
@@ -17,7 +17,7 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
       - ./init:/docker-entrypoint-initdb.d
-    command: --mysql-native-password=ON
+    # command: --mysql-native-password=ON
     environment:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASS}
@@ -55,7 +55,7 @@ services:
 
   directus:
     container_name: directus
-    image: directus/directus:latest
+    image: directus/directus:11.1.1
     restart: always
     ports:
       - ${DIRECTUS_PORT}:8055
