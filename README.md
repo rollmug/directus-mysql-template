@@ -82,7 +82,7 @@ Then wait 10-20 seconds (for MySQL to boot), then type:
 **Boom!** You're done. Now you can access the URLS from here:
 
 Directus CMS: http://localhost:8055  
-Apollo GraphQL Sandbox: https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:8055  
+Apollo GraphQL Sandbox: https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:8055/graphql  
 Adminer (for MySQL): http://localhost:8080
 
 **Check on running containers:**
