@@ -41,28 +41,6 @@ As an alternative, you can install this package by following these steps. Once y
 
 If you want to seed your database with data on first launch, place your .sql file(s) in the "init" directory at the root of this package. MySQL will run any files in this directory the first time it launches.
 
-### Snapshot the Data Model
-
-Directus can automatically generate a snapshot of your current data model in YAML format. This includes all collections, fields, and relations, and their configuration. This snapshot can be checked in version control and shared with your team. To generate the snapshot, run:
-
-`npm run snapshot`
-
-The 'directus' container **must be running** in order to take a snapshot.
-
-### Apply a Snapshot
-
-To overwrite the current Directus instance with the data model specified in that snapshot, you can apply a snapshot by running:
-
-`npm run snapshot-apply --snapshot=snapshot-file.yaml`
-
-Change the name of the file in the command to match an actual snapshot file in your 'snapshots' directory.
-
-By applying the snapshot, Directus will auto-detect the changes required to make the current instance up to date with the proposed data model in the snapshot file, and will run the required migrations to the database to make it match the snapshot. This is useful when migrating to/from another directus instance.
-
-**It is recommended that you test this first by doing a dry-run like this:**
-
-`npm run snapshot-test --snapshot=snapshot-file.yaml`
-
 ### Starting/stopping with Docker Compose
 
 To **stop** your running containers, simply run `docker compose down` in your terminal from within the project directory. All containers will be stopped.
@@ -88,6 +66,54 @@ Adminer (for MySQL): http://localhost:8080
 **Check on running containers:**
 
 Simply run `docker compose ps` to see the status of running containers. Or, run `docker compose ps -a` to see all containers, running or not.
+
+### NGINX Proxy example
+
+Included in this package is also a `docker-compose-nginx.yml` file that demonstrates how to run a reverse proxy on a Linux-based server so that you can use a custom domain with an auto-generated/renewed SSL certificate via Let's Encrypt.
+
+To use this, rename the existing `docker-compose.yml` file to something else, and rename the `docker-compose-nginx.yml` to `docker-compose.yml`.
+
+Add the following env variables to your `.env` file:
+
+```bash
+VIRTUAL_HOST="your-domain.com"
+CERT_EMAIL="you@email"
+```
+
+and make sure your Directus .env variables look something like this:
+
+```bash
+DIRECTUS_DOMAIN="localhost"
+DIRECTUS_PORT="8055"
+PUBLIC_URL="https://your-domain.com"
+API_ENDPOINT="https://your-domain.com/graphql"
+```
+
+Lastly, before running `npm start`, make sure you have pointed to your domain's DNS to your server using the appropriate A records.
+
+Note: you may need to adjust or disable your firewall before running this, to ensure that the SSL certificate can be properly generated using the included `acme-companion` container for Let's Encrypt.
+
+### Snapshot the Data Model
+
+Directus can automatically generate a snapshot of your current data model in YAML format. This includes all collections, fields, and relations, and their configuration. This snapshot can be checked in version control and shared with your team. To generate the snapshot, run:
+
+`npm run snapshot`
+
+The 'directus' container **must be running** in order to take a snapshot.
+
+### Apply a Snapshot
+
+To overwrite the current Directus instance with the data model specified in that snapshot, you can apply a snapshot by running:
+
+`npm run snapshot-apply --snapshot=snapshot-file.yaml`
+
+Change the name of the file in the command to match an actual snapshot file in your 'snapshots' directory.
+
+By applying the snapshot, Directus will auto-detect the changes required to make the current instance up to date with the proposed data model in the snapshot file, and will run the required migrations to the database to make it match the snapshot. This is useful when migrating to/from another directus instance.
+
+**It is recommended that you test this first by doing a dry-run like this:**
+
+`npm run snapshot-test --snapshot=snapshot-file.yaml`
 
 ### Examples of getting an auth token for Directus API:
 

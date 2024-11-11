@@ -1,0 +1,31 @@
+# This is a sample .env file with all possible options
+
+# Email and password to login to Directus:
+ADMIN_EMAIL="you@email"
+ADMIN_PASSWORD="s0mEpa55w0rd"
+
+# Define the mysql user name and password:
+MYSQL_USER="admin"
+MYSQL_PASS="s0mEpa55w0rd"
+
+# Give your database a name:
+MYSQL_DB="directus"
+
+# Set a root password for MySQL to something secure:
+MYSQL_ROOT_PASS="s0mEpa55w0rd"
+
+# Set the domain for directus to use:
+# eg, https://mydomain.com
+# in local dev environments, just leave it set to localhost:port
+DIRECTUS_DOMAIN="localhost"
+DIRECTUS_PORT="8055"
+PUBLIC_URL="https://your-domain.com"
+API_ENDPOINT="https://your-domain.com/graphql"
+
+EMAIL_TRANSPORT="sendgrid"
+EMAIL_SENDGRID_API_KEY="your-send-grid-api-key"
+EMAIL_FROM="you@email"
+
+# for use with the nginx proxy version:
+VIRTUAL_HOST="your-domain.com"
+CERT_EMAIL="you@email"

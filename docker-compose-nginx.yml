@@ -1,0 +1,152 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
+    labels:
+      - com.github.nginx-proxy.nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
+    networks: 
+      - directus
+    
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    restart: always
+    depends_on:
+      - nginx-proxy
+    environment:
+      DEFAULT_EMAIL: ${ADMIN_EMAIL}
+      NGINX_PROXY_CONTAINER: nginx-proxy
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks: 
+      - directus
+
+  mysql:
+    container_name: mysql
+    image: mysql:9.0.1
+    restart: always
+    healthcheck: 
+      test: ['CMD', 'mysqladmin', 'ping', '--silent']
+      interval: 5s
+      timeout: 20s
+      retries: 3
+      start_period: 5s
+    networks: 
+      - directus
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+    # command: --mysql-native-password=ON
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASS}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+
+  adminer:
+    container_name: adminer
+    image: adminer:latest
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    networks: 
+      - directus
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    ports:
+      - 8080:8080
+
+  cache:
+    container_name: cache
+    image: redis:6.2.6
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_interval: 5s
+      start_period: 30s
+    networks:
+      - directus
+
+  directus:
+    container_name: directus
+    image: directus/directus:11.1.1
+    restart: always
+    ports:
+      - ${DIRECTUS_PORT}:8055
+    expose:
+      - 8055
+    volumes:
+      - ./directus/uploads:/directus/uploads
+      - ./snapshots:/directus/snapshots
+    networks:
+      - directus
+    depends_on:
+      mysql:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    environment:
+      KEY: '255d861b-5ea1-5996-9aa3-922530ec40b1'
+      SECRET: '6116487b-cda1-52c2-b5b5-c8022c45e263'
+      DB_CLIENT: 'mysql'
+      DB_HOST: 'mysql'
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASS}
+      DB_DATABASE: ${MYSQL_DB}
+      DB_PORT: '3306'
+
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      VIRTUAL_PORT: ${DIRECTUS_PORT}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${CERT_EMAIL}
+
+      CACHE_ENABLED: 'true'
+      CACHE_STORE: 'redis'
+      REDIS: 'redis://cache:6379'
+      CACHE_AUTO_PURGE: 'true'
+      CACHE_SYSTEM_TTL: '2m'
+      CACHE_SCHEMA: 'false'
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'true'
+
+      # uncomment the following lines to enable email verification
+      EMAIL_VERIFY_SETUP: 'true'
+      EMAIL_TRANSPORT: ${EMAIL_TRANSPORT}
+      EMAIL_SENDGRID_API_KEY: ${EMAIL_SENDGRID_API_KEY}
+      EMAIL_FROM: ${EMAIL_FROM}
+
+      PUBLIC_URL: ${PUBLIC_URL}
+
+networks:
+  directus:
+    driver: bridge
+volumes:
+    conf:
+    vhost:
+    html:
+    certs:
+    acme:
