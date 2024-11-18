@@ -10,6 +10,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf
       - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
@@ -132,6 +133,8 @@ services:
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       CORS_ENABLED: 'true'
       CORS_ORIGIN: 'true'
+      FILES_MAX_UPLOAD_SIZE: '10mb'
+      MAX_PAYLOAD_SIZE: '10mb'
 
       # uncomment the following lines to enable email verification
       EMAIL_VERIFY_SETUP: 'true'
