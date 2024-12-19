@@ -2,7 +2,7 @@ services:
 
   mysql:
     container_name: mysql
-    image: mysql:9.0.1
+    image: mysql:9.1.0
     restart: always
     healthcheck: 
       test: ['CMD', 'mysqladmin', 'ping', '--silent']
@@ -55,7 +55,7 @@ services:
 
   directus:
     container_name: directus
-    image: directus/directus:11.1.1
+    image: directus/directus:11.3.5
     restart: always
     ports:
       - ${DIRECTUS_PORT}:8055
