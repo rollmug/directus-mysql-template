@@ -37,6 +37,14 @@ As an alternative, you can install this package by following these steps. Once y
 
 *Note that you'll only have to do these two steps the first time you run this.*
 
+### Permissions
+
+You may need to grant additional access to the 'directus' directory, so that Directus can create files there. Just run:
+
+```
+sudo chmod -R 777 directus
+```
+
 ### Seeding MySQL data
 
 If you want to seed your database with data on first launch, place your .sql file(s) in the "init" directory at the root of this package. MySQL will run any files in this directory the first time it launches.
