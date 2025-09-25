@@ -1,0 +1,17 @@
+If using PM2 to automatically start processes:
+
+1. Update the docker-compose.yaml file so that all services use "restart: on-failure"
+2. Stop all running services (npm run stop)
+
+3. Install and configure:
+
+npm install -g pm2
+pm2 --version
+
+pm2 start ecosystem.config.cjs
+
+pm2 startup (then paste the command it outputs)
+
+pm2 save
+
+4. Now, all services to start up properly on reboot or power failure.
