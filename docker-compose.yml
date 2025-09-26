@@ -15,7 +15,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ./init:/docker-entrypoint-initdb.d
     # command: --mysql-native-password=ON
     environment:
@@ -100,6 +100,8 @@ services:
 
       PUBLIC_URL: ${PUBLIC_URL}
 
+volumes:
+  mysql-data:
 networks:
   directus:
     driver: bridge
