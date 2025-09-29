@@ -52,9 +52,8 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ./init:/docker-entrypoint-initdb.d
-    # command: --mysql-native-password=ON
     environment:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASS}
@@ -79,20 +78,28 @@ services:
 
   cache:
     container_name: cache
-    image: redis:6.2.6
+    build:
+      context: ./redis
+    restart: always
+    privileged: true
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: ["sh", "-c", "./init.sh"]
     healthcheck:
-      test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_interval: 5s
       start_period: 30s
+    volumes:
+      - redis_data:/data:rw
     networks:
       - directus
 
   directus:
     container_name: directus
-    image: directus/directus:11.3.5
+    image: directus/directus:11.12.0
     restart: always
     ports:
       - ${DIRECTUS_PORT}:8055
@@ -117,6 +124,7 @@ services:
       DB_PASSWORD: ${MYSQL_PASS}
       DB_DATABASE: ${MYSQL_DB}
       DB_PORT: '3306'
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
 
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       VIRTUAL_PORT: ${DIRECTUS_PORT}
@@ -125,7 +133,7 @@ services:
 
       CACHE_ENABLED: 'true'
       CACHE_STORE: 'redis'
-      REDIS: 'redis://cache:6379'
+      REDIS: 'redis://default:${REDIS_PASSWORD}@cache:6379'
       CACHE_AUTO_PURGE: 'true'
       CACHE_SYSTEM_TTL: '2m'
       CACHE_SCHEMA: 'false'
@@ -153,3 +161,5 @@ volumes:
     html:
     certs:
     acme:
+    redis_data:
+    mysql-data:
