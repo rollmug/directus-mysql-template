@@ -1,5 +1,9 @@
 # This is a sample .env file with all possible options
 
+# Directus Instance Owner
+# this is to comply with the Directus BSL License 1.1 
+PROJECT_OWNER="you@email"
+
 # Email and password to login to Directus:
 ADMIN_EMAIL="you@email"
 ADMIN_PASSWORD="s0mEpa55w0rd"
@@ -13,6 +17,9 @@ MYSQL_DB="directus"
 
 # Set a root password for MySQL to something secure:
 MYSQL_ROOT_PASS="s0mEpa55w0rd"
+
+# Set a password for redis
+REDIS_PASSWORD="s0mEpa55w0rd"
 
 # Set the domain for directus to use:
 # eg, https://mydomain.com
