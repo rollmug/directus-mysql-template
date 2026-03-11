@@ -108,6 +108,7 @@ services:
     volumes:
       - ./directus/uploads:/directus/uploads
       - ./snapshots:/directus/snapshots
+      - ./extensions:/directus/extensions
     networks:
       - directus
     depends_on:
@@ -127,6 +128,8 @@ services:
       DB_DATABASE: ${MYSQL_DB}
       DB_PORT: '3306'
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+
+      EXTENSIONS_AUTO_RELOAD: true
 
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       VIRTUAL_PORT: ${DIRECTUS_PORT}
